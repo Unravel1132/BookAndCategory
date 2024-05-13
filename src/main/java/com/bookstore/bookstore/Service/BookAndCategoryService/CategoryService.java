@@ -10,7 +10,7 @@ public interface CategoryService {
     List<CategoryDTO> findAll();
     CategoryDTO findById(Long id);
     CategoryDTO save(CategoryDTO categoryDTO);
-    void delete(CategoryDTO categoryDTO);
+    void delete(Long id);
 
     CategoryDTO findByName(String categoryName);
 }

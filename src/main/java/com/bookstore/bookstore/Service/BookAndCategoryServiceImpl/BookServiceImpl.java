@@ -22,11 +22,17 @@ import java.util.stream.Collectors;
 public class BookServiceImpl implements BookService {
 
 
-    @Autowired
-    private BookRepository bookRepository;
-    private BookMapper bookMapper;
-    private CategoryService categoryService;
 
+    private final BookRepository bookRepository;
+    private final BookMapper bookMapper;
+    private final CategoryService categoryService;
+
+    @Autowired
+    public BookServiceImpl(BookRepository bookRepository, BookMapper bookMapper, CategoryService categoryService) {
+        this.bookRepository = bookRepository;
+        this.bookMapper = bookMapper;
+        this.categoryService = categoryService;
+    }
 
     @Override
     public List<BookDTO> getBooks() {
