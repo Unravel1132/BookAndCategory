@@ -10,5 +10,5 @@ import java.util.List;
 public class CategoryDTO {
     private Long id;
     private String name;
-    private List<Book> booklist;
+   private List<BookDTO> booklist;
 }

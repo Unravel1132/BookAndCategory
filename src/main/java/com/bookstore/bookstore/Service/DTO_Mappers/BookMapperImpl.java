@@ -17,6 +17,7 @@ public class BookMapperImpl implements BookMapper {
         book.setTitle(bookDTO.getTitle());
         book.setAuthor(bookDTO.getAuthor());
         book.setPrice(bookDTO.getPrice());
+        book.setCategory(bookDTO.getCategory());
         return book;
     }
 
@@ -28,7 +29,7 @@ public class BookMapperImpl implements BookMapper {
         bookDTO.setTitle(book.getTitle());
         bookDTO.setAuthor(book.getAuthor());
         bookDTO.setPrice(book.getPrice());
-
+        bookDTO.setCategory(book.getCategory());
         return bookDTO;
     }
 }

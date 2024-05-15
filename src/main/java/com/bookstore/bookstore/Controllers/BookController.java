@@ -38,9 +38,16 @@ public class BookController {
         }
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<BookDTO> addBook(@RequestBody BookDTO bookDTO) {
-
-
+    @PostMapping("/add/{id}")
+    public ResponseEntity<BookDTO> addBook(@PathVariable Long id, @RequestBody BookDTO bookDTO) {
+        try {
+            return ResponseEntity.ok(bookService.addBook(bookDTO, id));
+        } catch (IllegalArgumentException e) {
+            logger.error(e.getMessage());
+            return ResponseEntity.badRequest().build();
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 }
