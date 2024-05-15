@@ -72,45 +72,43 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public BookDTO updateBook(BookDTO bookDTO, Long categoryId) {
-        Long id = bookDTO.getId();
-        if(id != null) {
-            Optional<Book> book = bookRepository.findById(id);
+    public BookDTO updateBook(BookDTO bookDTO, Long categoryId, Long bookId){
+        if(bookId != null){
+            Optional<Book> book = bookRepository.findById(bookId);
             if (book.isPresent()) {
                 Book book1 = book.get();
                 book1.setTitle(bookDTO.getTitle());
                 book1.setAuthor(bookDTO.getAuthor());
                 book1.setPrice(bookDTO.getPrice());
                 Category category = new Category();
-                if(categoryId != null) {
+                if(categoryId != null){
                     category.setId(categoryId);
+                    book1.setCategory(category);
                 }
                 else {
                     throw new IllegalArgumentException("Category id cannot be null");
                 }
-                book1.setCategory(category);
                 bookRepository.save(book1);
                 return bookMapper.toBookDTO(book1);
-            }else {
-             throw new IllegalArgumentException("Book id cannot be null");
+
+            }
+            else {
+                throw new IllegalArgumentException("Book id cannot be null");
             }
         }else {
-            throw new IllegalArgumentException("ID cannot be null");
+            throw new IllegalArgumentException("Book id cannot be null");
         }
-
-
     }
+
 
     @Override
     public List<BookDTO> getBooksByCategoryName(String categoryName) {
-
         CategoryDTO categoryDTO = categoryService.findByName(categoryName);
         if(categoryDTO != null) {
             List<Book> bookDTOS = bookRepository.findByCategory(categoryDTO);
             return bookDTOS.stream().map(bookMapper::toBookDTO)
                     .collect(Collectors.toList());
         }
-
         else {
             return Collections.emptyList();
         }

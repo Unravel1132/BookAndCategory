@@ -81,7 +81,7 @@ public class CategoryController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/find/{name}")
+    @GetMapping("/find")
     public ResponseEntity<CategoryDTO> finByName(@RequestParam String name) {
         try{
             return ResponseEntity.ok(categoryService.findByName(name));
