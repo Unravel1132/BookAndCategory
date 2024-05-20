@@ -41,6 +41,16 @@ public class BookController {
     }
 
 
+    @GetMapping("/all/{id}")
+    public ResponseEntity<BookDTO> getBookById(@PathVariable Long id) {
+        try{
+            return ResponseEntity.ok(bookServiceImpl.getBookById(id));
+        }catch (Exception e){
+            logger.error("Error", e);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
     @PostMapping("/add/{categoryId}")
     public ResponseEntity<BookDTO> addBook(@PathVariable Long categoryId, @RequestBody BookDTO bookDTO) {
         try {
